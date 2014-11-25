@@ -48,22 +48,6 @@ class RPS:
             # Abed
             return "Cool cool, cool ..."
 
-def connectHandlers(self):
-    self.window.connect('delete-event', self.window_close)
-    self.btnPlay.connect('clicked', self.on_button_clicked)
-    self.rbRock.connect('toggled', self.on_radio_toggle)
-    self.rbPaper.connect('toggled', self.on_radio_toggle)
-    self.rbScissors.connect('toggled', self.on_radio_toggle)
-
-def retreiveObjects(self):
-    self.window = self.builder.get_object("window1")
-    self.rbRock = self.builder.get_object('rbRock')
-    self.rbPaper = self.builder.get_object('rbPaper')
-    self.rbScissors = self.builder.get_object('rbScissors')
-    self.lblResult = self.builder.get_object('lblResult')
-    self.btnPlay = self.builder.get_object('btnPlay')
-    self.imgSelected = self.builder.get_object('imgSelected')
-
 class UI:
     # Handlers
     def window_close(self, *args):
@@ -82,12 +66,28 @@ class UI:
             self.imgSelected.set_from_file(self.images[self.choice])
     # ---
 
+    def connectHandlers(self):
+        self.window.connect('delete-event', self.window_close)
+        self.btnPlay.connect('clicked', self.on_button_clicked)
+        self.rbRock.connect('toggled', self.on_radio_toggle)
+        self.rbPaper.connect('toggled', self.on_radio_toggle)
+        self.rbScissors.connect('toggled', self.on_radio_toggle)
+
+    def retreiveObjects(self):
+        self.window = self.builder.get_object("window1")
+        self.rbRock = self.builder.get_object('rbRock')
+        self.rbPaper = self.builder.get_object('rbPaper')
+        self.rbScissors = self.builder.get_object('rbScissors')
+        self.lblResult = self.builder.get_object('lblResult')
+        self.btnPlay = self.builder.get_object('btnPlay')
+        self.imgSelected = self.builder.get_object('imgSelected')
+
     def __init__(self):
         self.builder = Gtk.Builder()
         self.builder.add_from_file("view.glade")
 
-        retreiveObjects(self)
-        connectHandlers(self)
+        self.retreiveObjects()
+        self.connectHandlers()
 
         self.window.show()
 
